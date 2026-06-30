@@ -128,6 +128,77 @@
     nav a:not([class*="btn"]):hover { text-shadow: 0 0 14px rgba(192,57,43,0.5); }
     footer a svg { transition: filter 0.25s; }
     footer a:hover svg { filter: drop-shadow(0 0 6px rgba(192,57,43,0.8)); }
+
+    /* ── BUILD STAGE SWIPE CAROUSEL (mobile) ─────────────── */
+    .stage-carousel {
+      display: none; /* desktop: hidden, uses tab system */
+    }
+    .stage-carousel-track {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    .stage-carousel-track::-webkit-scrollbar { display: none; }
+    .stage-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      width: 100%;
+    }
+    .stage-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 0 4px;
+    }
+    .stage-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transition: background 0.3s, transform 0.3s;
+      flex-shrink: 0;
+    }
+    .stage-dot.active { background: #C0392B; transform: scale(1.3); }
+
+    /* ── MOBILE OVERRIDES ─────────────────────────────────── */
+    @media (max-width: 767px) {
+      /* Hero */
+      .hero-img { background-position: 65% 40%; }
+      .hero-ctas-wrap { flex-direction: column; gap: 12px; }
+      .hero-ctas-wrap a, .hero-ctas-wrap button { width: 100% !important; text-align: center; justify-content: center; }
+
+      /* Bob's Story image grid */
+      .story-img-grid > div:first-child img { height: 240px !important; }
+      .story-img-grid .grid > div img { height: 140px !important; }
+
+      /* Stage selector — hide tab version, show carousel */
+      .stage-tab-system { display: none !important; }
+      .stage-carousel { display: block; }
+
+      /* Gallery mobile heights */
+      .gallery-hero-img { height: 260px !important; }
+      .gallery-mid-img  { height: 180px !important; }
+      .gallery-sm-img   { height: 130px !important; }
+
+      /* Service card images */
+      .svc-img-mobile { height: 180px !important; }
+
+      /* CTA section */
+      .cta-headline { font-size: clamp(2.8rem, 12vw, 5rem) !important; }
+
+      /* Footer grid */
+      .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+
+      /* Contact modal padding */
+      #contact-modal > div { padding: 28px 20px !important; }
+
+      /* Buttons full width on mobile */
+      .mob-full { width: 100% !important; text-align: center !important; display: block !important; }
+
+      /* Stat strip smaller on mobile */
+      .stat-pill { padding: 0 28px !important; gap: 10px !important; }
+    }
   </style>
 </head>
 <body>
@@ -218,7 +289,7 @@
       <div style="font-size:0.72rem;color:rgba(245,240,232,0.3);letter-spacing:0.06em;">Owosso, MI &middot; 33 Years Running</div>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flex flex-col sm:flex-row gap-4 hero-ctas-wrap">
       <button type="button" onclick="openContact()" class="btn-rust w-full sm:w-auto text-center">Talk to Bob</button>
       <a href="#build" class="btn-ghost-rust w-full sm:w-auto text-center">See the '57 Build</a>
     </div>
@@ -312,84 +383,123 @@
 
     <div class="reveal" style="background:#111113; border:1px solid rgba(255,255,255,0.06);">
 
-      <!-- Stage navigation -->
-      <div class="stage-nav overflow-x-auto">
-        <button class="stage-btn active" onclick="setStage(0)" id="sbtn-0">01 — Teardown</button>
-        <button class="stage-btn" onclick="setStage(1)" id="sbtn-1">02 — Frame Off</button>
-        <button class="stage-btn" onclick="setStage(2)" id="sbtn-2">03 — Mechanical</button>
-        <button class="stage-btn" onclick="setStage(3)" id="sbtn-3">04 — Paint</button>
-        <button class="stage-btn" onclick="setStage(4)" id="sbtn-4">05 — Reveal</button>
-      </div>
-
-      <!-- Stage panels -->
-      <div id="stage-0" class="stage-panel active grid-cols-1 md:grid-cols-2">
-        <div class="gallery-item" style="height:420px;">
-          <img src="stage-1-teardown.jpg" alt="1957 Bel Air in original barn find condition" class="w-full h-full object-cover">
+      <!-- DESKTOP: Tab system (hidden on mobile) -->
+      <div class="stage-tab-system">
+        <div class="stage-nav overflow-x-auto">
+          <button class="stage-btn active" onclick="setStage(0)" id="sbtn-0">01 — Teardown</button>
+          <button class="stage-btn" onclick="setStage(1)" id="sbtn-1">02 — Frame Off</button>
+          <button class="stage-btn" onclick="setStage(2)" id="sbtn-2">03 — Mechanical</button>
+          <button class="stage-btn" onclick="setStage(3)" id="sbtn-3">04 — Paint</button>
+          <button class="stage-btn" onclick="setStage(4)" id="sbtn-4">05 — Reveal</button>
         </div>
-        <div class="p-10 flex flex-col justify-center">
-          <div class="label mb-3" style="color:#C0392B;">Stage 01</div>
-          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE BARN FIND</h3>
-          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">This is where every great restoration starts — a car that's been sleeping for decades. Rust, oxidized paint, seized components. To most people it looks like scrap. To Bob, it looks like potential.</p>
-          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
-          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Every frame-off restoration at Dedic's starts with a full assessment. Bob walks every inch of the car before a single bolt is touched.</div>
+        <div id="stage-0" class="stage-panel active grid-cols-1 md:grid-cols-2">
+          <div class="gallery-item" style="height:420px;"><img src="stage-1-teardown.jpg" alt="1957 Bel Air barn find" class="w-full h-full object-cover"></div>
+          <div class="p-10 flex flex-col justify-center">
+            <div class="label mb-3" style="color:#C0392B;">Stage 01</div>
+            <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE BARN FIND</h3>
+            <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">This is where every great restoration starts — a car that's been sleeping for decades. Rust, oxidized paint, seized components. To most people it looks like scrap. To Bob, it looks like potential.</p>
+            <div class="rust-rule-left" style="width:48px;margin-bottom:20px;"></div>
+            <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Every frame-off restoration at Dedic's starts with a full assessment. Bob walks every inch of the car before a single bolt is touched.</div>
+          </div>
         </div>
-      </div>
-
-      <div id="stage-1" class="stage-panel grid-cols-1 md:grid-cols-2">
-        <div class="gallery-item" style="height:420px;">
-          <img src="stage-2-frame-off.jpg" alt="1957 Bel Air completely disassembled — bare body on rotisserie, clean frame below" class="w-full h-full object-cover">
+        <div id="stage-1" class="stage-panel grid-cols-1 md:grid-cols-2">
+          <div class="gallery-item" style="height:420px;"><img src="stage-2-frame-off.jpg" alt="Frame off" class="w-full h-full object-cover"></div>
+          <div class="p-10 flex flex-col justify-center">
+            <div class="label mb-3" style="color:#C0392B;">Stage 02</div>
+            <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">FRAME OFF</h3>
+            <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The body comes completely off the frame. Every component is disassembled, inspected, and catalogued. The frame gets stripped, sandblasted, and rebuilt from scratch. This is the only way to do it right.</p>
+            <div class="rust-rule-left" style="width:48px;margin-bottom:20px;"></div>
+            <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Notice the "PROJECT: 1957 BEL AIR" sign on the wall. Every build gets treated with that level of intention.</div>
+          </div>
         </div>
-        <div class="p-10 flex flex-col justify-center">
-          <div class="label mb-3" style="color:#C0392B;">Stage 02</div>
-          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">FRAME OFF</h3>
-          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The body comes completely off the frame. Every component is disassembled, inspected, and catalogued. The frame gets stripped, sandblasted, and rebuilt from scratch. This is the only way to do it right.</p>
-          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
-          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Notice the "PROJECT: 1957 BEL AIR" sign on the wall. Every build gets treated with that level of intention.</div>
+        <div id="stage-2" class="stage-panel grid-cols-1 md:grid-cols-2">
+          <div class="gallery-item" style="height:420px;"><img src="stage-3-mechanical.jpg" alt="Mechanical build" class="w-full h-full object-cover"></div>
+          <div class="p-10 flex flex-col justify-center">
+            <div class="label mb-3" style="color:#C0392B;">Stage 03</div>
+            <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE MECHANICAL BUILD</h3>
+            <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">Body goes back on the clean frame. Fresh LS engine drops in. Suspension completely rebuilt — new control arms, coilovers, steering rack. Air conditioning. Everything that makes this car better than factory.</p>
+            <div class="rust-rule-left" style="width:48px;margin-bottom:20px;"></div>
+            <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">This is where Bob's 33 years shows. The mechanical build is what separates a real restoration from a paint job with lipstick on it.</div>
+          </div>
         </div>
-      </div>
-
-      <div id="stage-2" class="stage-panel grid-cols-1 md:grid-cols-2">
-        <div class="gallery-item" style="height:420px;">
-          <img src="stage-3-mechanical.jpg" alt="1957 Bel Air with LS engine installed, suspension rebuilt, bare metal" class="w-full h-full object-cover">
+        <div id="stage-3" class="stage-panel grid-cols-1 md:grid-cols-2">
+          <div class="gallery-item" style="height:420px;"><img src="stage-4-paint.jpg" alt="Paint booth" class="w-full h-full object-cover"></div>
+          <div class="p-10 flex flex-col justify-center">
+            <div class="label mb-3" style="color:#C0392B;">Stage 04</div>
+            <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">SHOW QUALITY PAINT</h3>
+            <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The iconic red and white two-tone goes on in the booth. Bob's paint work is the reason his reputation spans three decades. Every panel prepped, blocked, and finished to show car standards.</p>
+            <div class="rust-rule-left" style="width:48px;margin-bottom:20px;"></div>
+            <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Robert Fitzsimmons on Google: "He matched the paint perfectly... great work."</div>
+          </div>
         </div>
-        <div class="p-10 flex flex-col justify-center">
-          <div class="label mb-3" style="color:#C0392B;">Stage 03</div>
-          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE MECHANICAL BUILD</h3>
-          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">Body goes back on the clean frame. Fresh LS engine drops in. Suspension is completely rebuilt — new control arms, coilovers, steering rack. Air conditioning. All the mechanical work that makes this car better than it ever was from the factory.</p>
-          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
-          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">This is where Bob's 33 years shows. The mechanical build is what separates a real restoration from a paint job with lipstick on it.</div>
+        <div id="stage-4" class="stage-panel grid-cols-1 md:grid-cols-2">
+          <div class="gallery-item" style="height:420px;"><img src="stage-5-reveal.jpg" alt="Completed '57 Bel Air" class="w-full h-full object-cover"></div>
+          <div class="p-10 flex flex-col justify-center">
+            <div class="label mb-3" style="color:#C0392B;">Stage 05</div>
+            <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE REVEAL</h3>
+            <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">From a rusty barn find to a show-stopping '57 Bel Air. Gleaming red and white two-tone, chrome restored, white walls, and an LS that makes it drive better than 1957. This is what Bob lives for.</p>
+            <div class="rust-rule-left" style="width:48px;margin-bottom:20px;"></div>
+            <button type="button" onclick="openContact()" class="btn-rust">Start Your Build with Bob</button>
+          </div>
         </div>
-      </div>
-
-      <div id="stage-3" class="stage-panel grid-cols-1 md:grid-cols-2">
-        <div class="gallery-item" style="height:420px;">
-          <img src="stage-4-paint.jpg" alt="1957 Bel Air in paint booth receiving iconic red and white two-tone paint" class="w-full h-full object-cover">
-        </div>
-        <div class="p-10 flex flex-col justify-center">
-          <div class="label mb-3" style="color:#C0392B;">Stage 04</div>
-          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">SHOW QUALITY PAINT</h3>
-          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The iconic red and white two-tone goes on in the booth. Bob's paint work is the reason his reputation spans three decades. Every panel prepped, blocked, and finished to show car standards. This is what the owner will be looking at for the next 30 years.</p>
-          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
-          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Robert Fitzsimmons on Google: "He did some work on my '04 Impala and matched the paint perfectly... great work."</div>
-        </div>
-      </div>
-
-      <div id="stage-4" class="stage-panel grid-cols-1 md:grid-cols-2">
-        <div class="gallery-item" style="height:420px;">
-          <img src="stage-5-reveal.jpg" alt="Fully restored 1957 Chevrolet Bel Air sitting on a rooftop at golden hour" class="w-full h-full object-cover">
-        </div>
-        <div class="p-10 flex flex-col justify-center">
-          <div class="label mb-3" style="color:#C0392B;">Stage 05</div>
-          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE REVEAL</h3>
-          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">From a rusty barn find to a show-stopping '57 Bel Air. Gleaming red and white two-tone, chrome restored, white walls, and an LS under the hood that makes it drive better than it did in 1957. This is what Bob lives for.</p>
-          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
-          <button type="button" onclick="openContact()" class="btn-rust">Start Your Build with Bob</button>
+        <div class="flex" style="height:3px;background:rgba(255,255,255,0.05);">
+          <div id="stage-progress" style="background:#C0392B;transition:width 0.4s ease;width:20%;"></div>
         </div>
       </div>
 
-      <!-- Stage progress bar -->
-      <div class="flex" style="height:3px; background:rgba(255,255,255,0.05);">
-        <div id="stage-progress" style="background:#C0392B; transition:width 0.4s ease; width:20%;"></div>
+      <!-- MOBILE: Swipe carousel (hidden on desktop) -->
+      <div class="stage-carousel">
+        <div class="stage-carousel-track" id="stage-carousel-track">
+          <div class="stage-slide">
+            <div style="height:280px;overflow:hidden;"><img src="stage-1-teardown.jpg" alt="Barn find" class="w-full h-full object-cover"></div>
+            <div class="p-6">
+              <div class="label mb-2" style="color:#C0392B;">Stage 01</div>
+              <h3 class="display text-cream mb-3" style="font-size:1.8rem;">THE BARN FIND</h3>
+              <p class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.65);">Rust, oxidized paint, seized components. To most people it's scrap. To Bob, it's potential. Every restoration starts here.</p>
+            </div>
+          </div>
+          <div class="stage-slide">
+            <div style="height:280px;overflow:hidden;"><img src="stage-2-frame-off.jpg" alt="Frame off" class="w-full h-full object-cover"></div>
+            <div class="p-6">
+              <div class="label mb-2" style="color:#C0392B;">Stage 02</div>
+              <h3 class="display text-cream mb-3" style="font-size:1.8rem;">FRAME OFF</h3>
+              <p class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.65);">Body off the frame. Everything stripped, sandblasted, catalogued. The "PROJECT: 1957 BEL AIR" sign on the wall says it all.</p>
+            </div>
+          </div>
+          <div class="stage-slide">
+            <div style="height:280px;overflow:hidden;"><img src="stage-3-mechanical.jpg" alt="Mechanical" class="w-full h-full object-cover"></div>
+            <div class="p-6">
+              <div class="label mb-2" style="color:#C0392B;">Stage 03</div>
+              <h3 class="display text-cream mb-3" style="font-size:1.8rem;">THE MECHANICAL BUILD</h3>
+              <p class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.65);">Fresh LS engine, rebuilt suspension, new steering, A/C. 33 years of know-how in every bolt. This is what separates a real restoration.</p>
+            </div>
+          </div>
+          <div class="stage-slide">
+            <div style="height:280px;overflow:hidden;"><img src="stage-4-paint.jpg" alt="Paint" class="w-full h-full object-cover"></div>
+            <div class="p-6">
+              <div class="label mb-2" style="color:#C0392B;">Stage 04</div>
+              <h3 class="display text-cream mb-3" style="font-size:1.8rem;">SHOW QUALITY PAINT</h3>
+              <p class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.65);">Red and white two-tone in the booth. Every panel prepped, blocked, finished to show car standards. Bob's name goes on every job.</p>
+            </div>
+          </div>
+          <div class="stage-slide">
+            <div style="height:280px;overflow:hidden;"><img src="stage-5-reveal.jpg" alt="Reveal" class="w-full h-full object-cover"></div>
+            <div class="p-6">
+              <div class="label mb-2" style="color:#C0392B;">Stage 05</div>
+              <h3 class="display text-cream mb-3" style="font-size:1.8rem;">THE REVEAL</h3>
+              <p class="font-body font-300 text-sm leading-relaxed mb-5" style="color:rgba(245,240,232,0.65);">From barn find to show car. This is what Bob lives for. 33 years and he still gets excited every single time.</p>
+              <button type="button" onclick="openContact()" class="btn-rust w-full text-center">Start Your Build with Bob</button>
+            </div>
+          </div>
+        </div>
+        <div class="stage-dots" id="stage-dots">
+          <div class="stage-dot active"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-dot"></div>
+        </div>
+        <p style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.22);padding-bottom:16px;">← SWIPE TO ADVANCE →</p>
       </div>
 
     </div>
@@ -923,6 +1033,17 @@
     menuOpen = false; mobMenu.style.opacity = '0'; mobMenu.style.pointerEvents = 'none';
     icOpen.classList.remove('hidden'); icClose.classList.add('hidden'); document.body.style.overflow = '';
   }));
+
+  /* ── Mobile carousel dot tracker ── */
+  (function() {
+    var track = document.getElementById('stage-carousel-track');
+    var dots = document.querySelectorAll('#stage-dots .stage-dot');
+    if (!track || !dots.length) return;
+    track.addEventListener('scroll', function() {
+      var idx = Math.round(track.scrollLeft / track.offsetWidth);
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+    }, { passive: true });
+  })();
 
   /* ── Build Stage Selector ── */
   var currentStage = 0;
