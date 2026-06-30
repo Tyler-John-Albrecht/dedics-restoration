@@ -61,7 +61,7 @@
 
     /* Hero */
     .hero-img { background-image: url('hero-bg.jpg'); background-size: cover; background-position: center 40%; }
-    .hero-vignette { background: linear-gradient(to bottom, rgba(10,10,11,0.2) 0%, rgba(10,10,11,0.5) 40%, rgba(10,10,11,0.95) 80%, rgba(10,10,11,1) 100%); }
+    .hero-vignette { background: linear-gradient(to bottom, rgba(10,10,11,0.1) 0%, rgba(10,10,11,0.25) 30%, rgba(10,10,11,0.82) 70%, rgba(10,10,11,1) 100%); }
 
     /* Stat strip */
     .stat-strip { background: #111113; border-top: 1px solid rgba(192,57,43,0.2); border-bottom: 1px solid rgba(192,57,43,0.2); }
@@ -174,23 +174,23 @@
   <div class="absolute top-1/3 left-1/4 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style="background:rgba(192,57,43,0.06);"></div>
 
   <!-- Rotating stamp -->
-  <div class="hidden lg:block absolute" style="right:8%; top:30%; transform:translateY(-50%); z-index:10; width:300px; height:300px; opacity:0; animation:stampFadeIn 0.5s ease 0.8s forwards;">
-    <svg style="position:absolute;top:0;left:0;width:300px;height:300px;" viewBox="0 0 300 300">
-      <circle cx="150" cy="150" r="138" fill="none" stroke="rgba(192,57,43,0.5)" stroke-width="1.5" stroke-dasharray="867" stroke-dashoffset="867" style="animation:drawRing 2s cubic-bezier(0.4,0,0.2,1) 1s forwards;"/>
-      <circle cx="150" cy="150" r="128" fill="none" stroke="rgba(192,57,43,0.12)" stroke-width="1"/>
+  <div class="hidden lg:block absolute" style="right:8%; top:30%; transform:translateY(-50%); z-index:10; width:340px; height:340px; opacity:0; animation:stampFadeIn 0.5s ease 0.8s forwards;">
+    <svg style="position:absolute;top:0;left:0;width:340px;height:340px;" viewBox="0 0 340 340">
+      <circle cx="170" cy="170" r="158" fill="none" stroke="rgba(192,57,43,0.5)" stroke-width="1.5" stroke-dasharray="992" stroke-dashoffset="992" style="animation:drawRing 2s cubic-bezier(0.4,0,0.2,1) 1s forwards;"/>
+      <circle cx="170" cy="170" r="146" fill="none" stroke="rgba(192,57,43,0.12)" stroke-width="1"/>
     </svg>
-    <div style="position:absolute;top:0;left:0;width:300px;height:300px;opacity:0;animation:stampFadeIn 0.8s ease 3s forwards;">
-      <svg style="width:300px;height:300px;animation:stampRotate 30s linear 3s infinite;" viewBox="0 0 300 300">
-        <defs><path id="rp" d="M150,150 m-133,0 a133,133 0 1,1 266,0 a133,133 0 1,1 -266,0"/></defs>
-        <text fill="#C0392B" font-size="12" letter-spacing="3.5" font-family="'Barlow Condensed',sans-serif" font-weight="700">
+    <div style="position:absolute;top:0;left:0;width:340px;height:340px;opacity:0;animation:stampFadeIn 0.8s ease 3s forwards;">
+      <svg style="width:340px;height:340px;animation:stampRotate 30s linear 3s infinite;" viewBox="0 0 340 340">
+        <defs><path id="rp" d="M170,170 m-152,0 a152,152 0 1,1 304,0 a152,152 0 1,1 -304,0"/></defs>
+        <text fill="#C0392B" font-size="15" letter-spacing="3" font-family="'Barlow Condensed',sans-serif" font-weight="700">
           <textPath href="#rp" startOffset="0%">DEDIC'S RESTORATION &bull; OWOSSO MI &bull; 33 YEARS &bull; FRAME-OFF &bull; LS SWAPS &bull;</textPath>
         </text>
       </svg>
     </div>
     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;animation:stampFadeIn 0.8s ease 0.9s forwards;">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;color:#F5F0E8;text-transform:uppercase;line-height:1.1;">DEDIC'S</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;color:#C0392B;text-transform:uppercase;letter-spacing:0.12em;">RESTORATION</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.65rem;color:rgba(245,240,232,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">EST. 1992</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:#F5F0E8;text-transform:uppercase;line-height:1.1;">DEDIC'S</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;color:#C0392B;text-transform:uppercase;letter-spacing:0.12em;">RESTORATION</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;color:rgba(245,240,232,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">EST. 1992</div>
     </div>
   </div>
 
@@ -225,9 +225,9 @@
   </div>
 
   <!-- Stats strip -->
-  <div class="stat-strip w-full py-6" style="position:relative;z-index:10;flex-shrink:0;">
-    <div class="marquee-viewport">
-      <div class="marquee-track" id="marquee-stats">
+  <div class="stat-strip w-full py-6" style="position:relative;z-index:10;flex-shrink:0;overflow:hidden;">
+    <div class="marquee-viewport" style="overflow:hidden;">
+      <div class="marquee-track" id="marquee-stats" style="padding:4px 0;">
         <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">33 YRS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">In Business &middot; Still Going</div><div class="stat-pill-dot"></div></div>
         <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">FRAME-OFF</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Full Restorations</div><div class="stat-pill-dot"></div></div>
         <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">LS SWAPS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Motor & Engine Builds</div><div class="stat-pill-dot"></div></div>
