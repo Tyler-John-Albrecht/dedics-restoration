@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dedic's Auto Body & Restoration | Owosso, MI — 33 Years of Craftsmanship</title>
+  <meta name="description" content="Bob Dedic has spent 33 years doing what he loves — frame-off restorations, rat rods, LS swaps, and show cars in Owosso, MI. This isn't a job. It's a candy store.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            body: ['"Barlow"', 'sans-serif'],
+          },
+          colors: {
+            ink:      '#0A0A0B',
+            carbon:   '#111113',
+            panel:    '#1A1A1D',
+            rail:     '#222226',
+            rust:     '#C0392B',
+            'rust-lt':'#E74C3C',
+            cream:    '#F5F0E8',
+            muted:    '#6B6B78',
+            chrome:   '#B8BCC8',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Barlow", sans-serif; background: #0A0A0B; color: #F5F0E8; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* Grain overlay */
+    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    .display { font-family: "Barlow Condensed", sans-serif; font-weight: 900; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; }
+    .label { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; }
+
+    /* Rust accent */
+    .rust-text { color: #C0392B; }
+    .rust-grad {
+      background: linear-gradient(-45deg, #C0392B, #E74C3C, #C0392B, #E74C3C);
+      background-size: 400% 400%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .rust-rule { height: 1px; background: linear-gradient(90deg, transparent, #C0392B, transparent); }
+    .rust-rule-left { height: 1px; background: linear-gradient(90deg, #C0392B, transparent); }
+
+    /* Nav */
+    .nav-glass { background: rgba(10,10,11,0); backdrop-filter: blur(0px); transition: background 0.4s, box-shadow 0.4s; }
+    .nav-glass.scrolled { background: rgba(10,10,11,0.95); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(192,57,43,0.15); }
+
+    /* Hero */
+    .hero-img { background-image: url('hero-bg.jpg'); background-size: cover; background-position: center 40%; }
+    .hero-vignette { background: linear-gradient(to bottom, rgba(10,10,11,0.2) 0%, rgba(10,10,11,0.5) 40%, rgba(10,10,11,0.95) 80%, rgba(10,10,11,1) 100%); }
+
+    /* Stat strip */
+    .stat-strip { background: #111113; border-top: 1px solid rgba(192,57,43,0.2); border-bottom: 1px solid rgba(192,57,43,0.2); }
+    .marquee-track { display: flex; flex-wrap: nowrap; will-change: transform; }
+    .marquee-viewport { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+    .stat-pill { display: flex; align-items: center; gap: 14px; padding: 0 48px; white-space: nowrap; }
+    .stat-pill-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(192,57,43,0.5); flex-shrink: 0; }
+
+    /* Buttons */
+    .btn-rust { display: inline-block; background: #C0392B; color: #F5F0E8; font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 36px; border: none; cursor: pointer; transition: background 0.25s, transform 0.25s, box-shadow 0.25s; }
+    .btn-rust:hover { background: #E74C3C; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(192,57,43,0.4); }
+    .btn-ghost-rust { display: inline-block; border: 1px solid rgba(192,57,43,0.5); color: #C0392B; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 36px; transition: border-color 0.25s, background 0.25s; }
+    .btn-ghost-rust:hover { border-color: #C0392B; background: rgba(192,57,43,0.08); }
+
+    /* Build Stage Selector */
+    .stage-nav { display: flex; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .stage-btn { flex: 1; padding: 16px 8px; font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6B78; background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.25s, border-color 0.25s; text-align: center; }
+    .stage-btn:hover { color: #F5F0E8; }
+    .stage-btn.active { color: #C0392B; border-bottom-color: #C0392B; }
+    .stage-panel { display: none; }
+    .stage-panel.active { display: grid; }
+
+    /* Service cards */
+    .svc-card { background: linear-gradient(160deg, rgba(26,26,29,0.9) 0%, rgba(15,15,17,0.98) 100%); border: 1px solid rgba(255,255,255,0.055); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.35s, box-shadow 0.4s; }
+    .svc-card:hover { transform: translateY(-8px); border-color: rgba(192,57,43,0.35); box-shadow: 0 24px 48px rgba(0,0,0,0.6), 0 0 32px rgba(192,57,43,0.1); }
+
+    /* Gallery */
+    .gallery-item { overflow: hidden; }
+    .gallery-item img { transition: transform 0.6s ease, filter 0.4s ease; filter: brightness(0.82); }
+    .gallery-item:hover img { transform: scale(1.06); filter: brightness(1); }
+
+    /* Reviews marquee */
+    .review-card { width: 320px; flex-shrink: 0; margin: 0 14px; background: linear-gradient(160deg, rgba(22,22,25,0.9), rgba(12,12,14,0.98)); border: 1px solid rgba(255,255,255,0.055); padding: 26px; transition: border-color 0.3s, box-shadow 0.3s; }
+    .review-card:hover { border-color: rgba(192,57,43,0.35); box-shadow: 0 0 24px rgba(192,57,43,0.12); }
+    .review-stars { color: #C0392B; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .review-text { font-family: "Barlow", sans-serif; font-weight: 300; font-size: 0.88rem; color: rgba(245,240,232,0.72); line-height: 1.68; margin-bottom: 16px; }
+    .review-author { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #C0392B; }
+    .review-source { font-size: 0.7rem; color: rgba(255,255,255,0.25); margin-top: 2px; }
+
+    /* CTA section */
+    .cta-bg { background-image: url('cta-banner.jpg'); background-size: cover; background-position: center; }
+    .cta-scrim { background: linear-gradient(100deg, rgba(10,10,11,0.97) 0%, rgba(10,10,11,0.88) 50%, rgba(10,10,11,0.65) 100%); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0A0A0B; }
+    ::-webkit-scrollbar-thumb { background: #2a2a2e; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #C0392B; }
+
+    /* Mobile sticky */
+    #sticky-bar { display: flex; will-change: transform; }
+    @media (min-width: 768px) { #sticky-bar { display: none; } }
+
+    @keyframes brand-flow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes stampFadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes stampRotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes drawRing { from{stroke-dashoffset:898.5} to{stroke-dashoffset:0} }
+    @media (prefers-reduced-motion: reduce) { .rust-grad, .btn-rust { animation: none !important; } }
+
+    nav a:not([class*="btn"]):hover { text-shadow: 0 0 14px rgba(192,57,43,0.5); }
+    footer a svg { transition: filter 0.25s; }
+    footer a:hover svg { filter: drop-shadow(0 0 6px rgba(192,57,43,0.8)); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50 nav-glass" id="nav">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between" id="nav-inner">
+    <a href="#home" style="text-decoration:none;">
+      <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; letter-spacing:0.04em; color:#F5F0E8; text-transform:uppercase;">DEDIC'S <span style="color:#C0392B;">RESTORATION</span></span>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#build" class="font-body text-chrome hover:text-cream transition-colors tracking-wide" style="color:#B8BCC8;">The Build</a>
+      <a href="#services" class="font-body text-chrome hover:text-cream transition-colors tracking-wide" style="color:#B8BCC8;">Services</a>
+      <a href="#story" class="font-body text-chrome hover:text-cream transition-colors tracking-wide" style="color:#B8BCC8;">Bob's Story</a>
+      <a href="#reviews" class="font-body text-chrome hover:text-cream transition-colors tracking-wide" style="color:#B8BCC8;">Reviews</a>
+      <button type="button" onclick="openContact()" class="btn-rust text-sm px-6 py-2.5">Talk to Bob</button>
+    </div>
+    <button id="mob-btn" class="md:hidden text-cream p-2 z-50 relative" aria-label="Menu">
+      <svg id="ic-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="ic-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu" class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden" style="background:rgba(10,10,11,0.98); backdrop-filter:blur(20px);">
+  <a href="#build"    class="mob-link display text-5xl text-cream">THE BUILD</a>
+  <a href="#services" class="mob-link display text-5xl text-cream">SERVICES</a>
+  <a href="#story"    class="mob-link display text-5xl text-cream">BOB'S STORY</a>
+  <a href="#reviews"  class="mob-link display text-5xl text-cream">REVIEWS</a>
+  <button type="button" onclick="openContact()" class="mob-link btn-rust mt-4 text-base px-14 py-4">Talk to Bob</button>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="home" class="relative w-full min-h-screen flex flex-col overflow-hidden hero-img">
+  <div class="absolute inset-0 hero-vignette"></div>
+
+  <!-- Ambient glow -->
+  <div class="absolute top-1/3 left-1/4 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style="background:rgba(192,57,43,0.06);"></div>
+
+  <!-- Rotating stamp -->
+  <div class="hidden lg:block absolute" style="right:8%; top:30%; transform:translateY(-50%); z-index:10; width:300px; height:300px; opacity:0; animation:stampFadeIn 0.5s ease 0.8s forwards;">
+    <svg style="position:absolute;top:0;left:0;width:300px;height:300px;" viewBox="0 0 300 300">
+      <circle cx="150" cy="150" r="138" fill="none" stroke="rgba(192,57,43,0.5)" stroke-width="1.5" stroke-dasharray="867" stroke-dashoffset="867" style="animation:drawRing 2s cubic-bezier(0.4,0,0.2,1) 1s forwards;"/>
+      <circle cx="150" cy="150" r="128" fill="none" stroke="rgba(192,57,43,0.12)" stroke-width="1"/>
+    </svg>
+    <div style="position:absolute;top:0;left:0;width:300px;height:300px;opacity:0;animation:stampFadeIn 0.8s ease 3s forwards;">
+      <svg style="width:300px;height:300px;animation:stampRotate 30s linear 3s infinite;" viewBox="0 0 300 300">
+        <defs><path id="rp" d="M150,150 m-133,0 a133,133 0 1,1 266,0 a133,133 0 1,1 -266,0"/></defs>
+        <text fill="#C0392B" font-size="12" letter-spacing="3.5" font-family="'Barlow Condensed',sans-serif" font-weight="700">
+          <textPath href="#rp" startOffset="0%">DEDIC'S RESTORATION &bull; OWOSSO MI &bull; 33 YEARS &bull; FRAME-OFF &bull; LS SWAPS &bull;</textPath>
+        </text>
+      </svg>
+    </div>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;animation:stampFadeIn 0.8s ease 0.9s forwards;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;color:#F5F0E8;text-transform:uppercase;line-height:1.1;">DEDIC'S</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;color:#C0392B;text-transform:uppercase;letter-spacing:0.12em;">RESTORATION</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.65rem;color:rgba(245,240,232,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">EST. 1992</div>
+    </div>
+  </div>
+
+  <div class="flex-1" style="min-height:6rem;"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 w-full pb-6">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-10 h-px" style="background:#C0392B;"></div>
+      <span class="label" style="color:#C0392B;">Owosso, MI &middot; Est. 1992</span>
+    </div>
+
+    <h1 class="display text-cream mb-6" style="font-size: clamp(2.8rem, 8vw, 7.5rem);">
+      THIS ISN'T<br>
+      A SHOP.<br>
+      <span class="rust-grad">IT'S A CANDY STORE.</span>
+    </h1>
+
+    <p class="font-body font-300 mb-8 text-xl md:text-2xl max-w-2xl leading-loose" style="color:rgba(245,240,232,0.75);">
+      Bob Dedic has spent 33 years doing what most people only dream about — building show cars, frame-off restorations, rat rods, and custom swaps out of Owosso, MI. He doesn't do this for the money. He does it because he loves it.
+    </p>
+
+    <div class="flex items-center gap-3 mb-8" style="flex-wrap:wrap;">
+      <div style="color:#C0392B;font-size:1rem;letter-spacing:0.05em;">★★★★★</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(245,240,232,0.75);">4.8 &nbsp;&middot;&nbsp; 24 Google Reviews</div>
+      <div style="font-size:0.72rem;color:rgba(245,240,232,0.3);letter-spacing:0.06em;">Owosso, MI &middot; 33 Years Running</div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <button type="button" onclick="openContact()" class="btn-rust w-full sm:w-auto text-center">Talk to Bob</button>
+      <a href="#build" class="btn-ghost-rust w-full sm:w-auto text-center">See the '57 Build</a>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stat-strip w-full py-6" style="position:relative;z-index:10;flex-shrink:0;">
+    <div class="marquee-viewport">
+      <div class="marquee-track" id="marquee-stats">
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">33 YRS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">In Business &middot; Still Going</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">FRAME-OFF</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Full Restorations</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">LS SWAPS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Motor & Engine Builds</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">RAT RODS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Custom Builds</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">SHOW CARS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Built to Win</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">4.8 ★</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Google Rating</div><div class="stat-pill-dot"></div></div>
+        <!-- Duplicate -->
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">33 YRS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">In Business &middot; Still Going</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">FRAME-OFF</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Full Restorations</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">LS SWAPS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Motor & Engine Builds</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">RAT RODS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Custom Builds</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">SHOW CARS</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Built to Win</div><div class="stat-pill-dot"></div></div>
+        <div class="stat-pill"><div class="display text-2xl" style="color:#C0392B;">4.8 ★</div><div class="label" style="color:#6B6B78;font-size:0.6rem;">Google Rating</div><div class="stat-pill-dot"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     BOB'S STORY
+══════════════════════════════════════ -->
+<section id="story" class="w-full py-24 md:py-32 px-4" style="background:#111113; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center reveal">
+      <div>
+        <div class="label mb-4" style="color:#C0392B;">The Man Behind the Shop</div>
+        <h2 class="display text-cream mb-8" style="font-size: clamp(2.6rem, 6vw, 5rem);">
+          33 YEARS IN.<br>STILL CAN'T<br><span class="rust-grad">WAIT TO GET HERE.</span>
+        </h2>
+        <p class="font-body font-300 mb-6 text-lg leading-relaxed" style="color:rgba(245,240,232,0.72);">
+          Bob Dedic didn't build a business. He built a life around doing what he loves. For 33 years, he's walked into this shop in Owosso every single morning like a kid walking into a candy store — because to him, that's exactly what it is.
+        </p>
+        <p class="font-body font-300 mb-6 text-lg leading-relaxed" style="color:rgba(245,240,232,0.72);">
+          Frame-off restorations, rat rods that turn heads at every show, LS swaps that make old iron run harder than ever, full suspension rebuilds, steering updates, air conditioning, interior work, and show-quality paint. If it's a classic car and it needs work, Bob has probably already done it — and loved every minute.
+        </p>
+        <p class="font-body font-300 mb-10 text-lg leading-relaxed" style="color:rgba(245,240,232,0.72);">
+          He's not running a production line. He's a craftsman who takes your project personally, because every car that rolls out of his shop has his name on it. That's why clients keep coming back for decades.
+        </p>
+        <div class="flex items-start gap-5 p-6" style="background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.18);">
+          <div class="display" style="font-size:2rem;color:#C0392B;line-height:1;">✦</div>
+          <div>
+            <div class="display text-cream text-lg mb-1">"IT'S A CANDY STORE EVERY DAY."</div>
+            <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.5);">— Bob Dedic, owner &amp; craftsman, Dedic's Auto Body &amp; Restoration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="gallery-item" style="border-radius:4px;">
+          <img src="rat-rod-truck.jpg" alt="Rat rod truck in front of Dedic's shop with the iconic '57 Bel Air on the roof" class="w-full object-cover" style="height:360px;">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="gallery-item" style="border-radius:4px;">
+            <img src="ls-swap.jpg" alt="LS swap in classic muscle car" class="w-full object-cover" style="height:180px;">
+          </div>
+          <div class="gallery-item" style="border-radius:4px;">
+            <img src="interior.jpg" alt="Custom restored interior" class="w-full object-cover" style="height:180px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     THE BUILD — INTERACTIVE STAGE SELECTOR
+══════════════════════════════════════ -->
+<section id="build" class="w-full py-24 md:py-32 px-4" style="background:#0A0A0B; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <div class="label mb-4" style="color:#C0392B;">The Process — Start to Finish</div>
+      <h2 class="display text-cream" style="font-size: clamp(2.6rem, 6vw, 5.5rem);">
+        WATCH THE<br><span class="rust-grad">'57 BEL AIR COME BACK TO LIFE.</span>
+      </h2>
+      <p class="font-body font-300 mt-5 max-w-xl mx-auto text-lg leading-relaxed" style="color:rgba(245,240,232,0.6);">
+        This is what a frame-off restoration looks like from the day it rolls in to the day it rolls out. Click through each stage.
+      </p>
+    </div>
+
+    <div class="reveal" style="background:#111113; border:1px solid rgba(255,255,255,0.06);">
+
+      <!-- Stage navigation -->
+      <div class="stage-nav overflow-x-auto">
+        <button class="stage-btn active" onclick="setStage(0)" id="sbtn-0">01 — Teardown</button>
+        <button class="stage-btn" onclick="setStage(1)" id="sbtn-1">02 — Frame Off</button>
+        <button class="stage-btn" onclick="setStage(2)" id="sbtn-2">03 — Mechanical</button>
+        <button class="stage-btn" onclick="setStage(3)" id="sbtn-3">04 — Paint</button>
+        <button class="stage-btn" onclick="setStage(4)" id="sbtn-4">05 — Reveal</button>
+      </div>
+
+      <!-- Stage panels -->
+      <div id="stage-0" class="stage-panel active grid-cols-1 md:grid-cols-2">
+        <div class="gallery-item" style="height:420px;">
+          <img src="stage-1-teardown.jpg" alt="1957 Bel Air in original barn find condition" class="w-full h-full object-cover">
+        </div>
+        <div class="p-10 flex flex-col justify-center">
+          <div class="label mb-3" style="color:#C0392B;">Stage 01</div>
+          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE BARN FIND</h3>
+          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">This is where every great restoration starts — a car that's been sleeping for decades. Rust, oxidized paint, seized components. To most people it looks like scrap. To Bob, it looks like potential.</p>
+          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
+          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Every frame-off restoration at Dedic's starts with a full assessment. Bob walks every inch of the car before a single bolt is touched.</div>
+        </div>
+      </div>
+
+      <div id="stage-1" class="stage-panel grid-cols-1 md:grid-cols-2">
+        <div class="gallery-item" style="height:420px;">
+          <img src="stage-2-frame-off.jpg" alt="1957 Bel Air completely disassembled — bare body on rotisserie, clean frame below" class="w-full h-full object-cover">
+        </div>
+        <div class="p-10 flex flex-col justify-center">
+          <div class="label mb-3" style="color:#C0392B;">Stage 02</div>
+          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">FRAME OFF</h3>
+          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The body comes completely off the frame. Every component is disassembled, inspected, and catalogued. The frame gets stripped, sandblasted, and rebuilt from scratch. This is the only way to do it right.</p>
+          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
+          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Notice the "PROJECT: 1957 BEL AIR" sign on the wall. Every build gets treated with that level of intention.</div>
+        </div>
+      </div>
+
+      <div id="stage-2" class="stage-panel grid-cols-1 md:grid-cols-2">
+        <div class="gallery-item" style="height:420px;">
+          <img src="stage-3-mechanical.jpg" alt="1957 Bel Air with LS engine installed, suspension rebuilt, bare metal" class="w-full h-full object-cover">
+        </div>
+        <div class="p-10 flex flex-col justify-center">
+          <div class="label mb-3" style="color:#C0392B;">Stage 03</div>
+          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE MECHANICAL BUILD</h3>
+          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">Body goes back on the clean frame. Fresh LS engine drops in. Suspension is completely rebuilt — new control arms, coilovers, steering rack. Air conditioning. All the mechanical work that makes this car better than it ever was from the factory.</p>
+          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
+          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">This is where Bob's 33 years shows. The mechanical build is what separates a real restoration from a paint job with lipstick on it.</div>
+        </div>
+      </div>
+
+      <div id="stage-3" class="stage-panel grid-cols-1 md:grid-cols-2">
+        <div class="gallery-item" style="height:420px;">
+          <img src="stage-4-paint.jpg" alt="1957 Bel Air in paint booth receiving iconic red and white two-tone paint" class="w-full h-full object-cover">
+        </div>
+        <div class="p-10 flex flex-col justify-center">
+          <div class="label mb-3" style="color:#C0392B;">Stage 04</div>
+          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">SHOW QUALITY PAINT</h3>
+          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">The iconic red and white two-tone goes on in the booth. Bob's paint work is the reason his reputation spans three decades. Every panel prepped, blocked, and finished to show car standards. This is what the owner will be looking at for the next 30 years.</p>
+          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
+          <div class="font-body font-300 text-sm leading-relaxed" style="color:rgba(245,240,232,0.4);">Robert Fitzsimmons on Google: "He did some work on my '04 Impala and matched the paint perfectly... great work."</div>
+        </div>
+      </div>
+
+      <div id="stage-4" class="stage-panel grid-cols-1 md:grid-cols-2">
+        <div class="gallery-item" style="height:420px;">
+          <img src="stage-5-reveal.jpg" alt="Fully restored 1957 Chevrolet Bel Air sitting on a rooftop at golden hour" class="w-full h-full object-cover">
+        </div>
+        <div class="p-10 flex flex-col justify-center">
+          <div class="label mb-3" style="color:#C0392B;">Stage 05</div>
+          <h3 class="display text-cream mb-5" style="font-size:clamp(2rem,4vw,3rem);">THE REVEAL</h3>
+          <p class="font-body font-300 text-lg leading-relaxed mb-6" style="color:rgba(245,240,232,0.68);">From a rusty barn find to a show-stopping '57 Bel Air. Gleaming red and white two-tone, chrome restored, white walls, and an LS under the hood that makes it drive better than it did in 1957. This is what Bob lives for.</p>
+          <div class="rust-rule-left" style="width:48px; margin-bottom:20px;"></div>
+          <button type="button" onclick="openContact()" class="btn-rust">Start Your Build with Bob</button>
+        </div>
+      </div>
+
+      <!-- Stage progress bar -->
+      <div class="flex" style="height:3px; background:rgba(255,255,255,0.05);">
+        <div id="stage-progress" style="background:#C0392B; transition:width 0.4s ease; width:20%;"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<section id="services" class="w-full py-24 md:py-32 px-4" style="background:#111113; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <div class="label mb-4" style="color:#C0392B;">What Bob Does</div>
+      <h2 class="display text-cream" style="font-size: clamp(2.6rem, 6vw, 5.5rem);">
+        IF IT'S A CLASSIC,<br><span class="rust-grad">BOB CAN BUILD IT.</span>
+      </h2>
+      <p class="font-body font-300 mt-5 max-w-lg mx-auto text-lg leading-relaxed" style="color:rgba(245,240,232,0.6);">
+        33 years of doing this means Bob has seen — and built — everything. Here's what he loves working on most.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="svc-card reveal flex flex-col">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="restoration-frame-off.jpg" alt="Frame-off restoration" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Specialty</div>
+          <h3 class="display text-cream text-2xl mb-3">FRAME-OFF RESTORATION</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">The full treatment. Body off the frame, everything stripped, rebuilt, and restored to better than factory condition. Bob treats every frame-off like it's going to a national show — because it usually is.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal flex flex-col" style="transition-delay:0.08s;">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="paint-job.jpg" alt="Show quality paint" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Paint</div>
+          <h3 class="display text-cream text-2xl mb-3">SHOW QUALITY PAINT</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">Whether it's a basic clean-up paint job so you can drive the car to shows, or a full show-quality finish that wins trophies — Bob's painted everything from daily drivers to display cars.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal flex flex-col" style="transition-delay:0.16s;">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="rat-rod-chevy.jpg" alt="Rat rod builds" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Custom Builds</div>
+          <h3 class="display text-cream text-2xl mb-3">RAT ROD BUILDS</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">Rusty, patina'd, and built to cruise. Bob loves rat rods because they're all about character and craftsmanship — updated suspension, modern running gear, and that unmistakable old iron attitude.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal flex flex-col" style="transition-delay:0.08s;">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="ls-swap.jpg" alt="LS swaps and motor swaps" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Drivetrain</div>
+          <h3 class="display text-cream text-2xl mb-3">LS & MOTOR SWAPS</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">Modern power in a classic body. Bob has done more LS swaps than he can count — full engine management, wiring, cooling, everything done clean. Old iron that runs like it's 2025.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal flex flex-col" style="transition-delay:0.16s;">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="suspension.jpg" alt="Suspension and steering updates" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Chassis</div>
+          <h3 class="display text-cream text-2xl mb-3">SUSPENSION & STEERING</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">Updated suspension, steering upgrades, and modern brakes that make your classic actually handle. Bob builds cars that drive as good as they look — not just show pieces.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal flex flex-col" style="transition-delay:0.24s;">
+        <div class="overflow-hidden" style="height:220px;">
+          <img src="interior.jpg" alt="Interior restoration" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="label mb-2" style="color:#6B6B78;">Interior & More</div>
+          <h3 class="display text-cream text-2xl mb-3">INTERIOR, A/C & MORE</h3>
+          <p class="font-body font-300 text-sm leading-relaxed mb-6" style="color:rgba(245,240,232,0.6);">Full interior restoration, air conditioning installs, and everything else that makes a classic car livable. Bob does it all under one roof — you don't need four different shops.</p>
+          <div class="mt-auto">
+            <button type="button" onclick="openContact()" class="btn-ghost-rust block text-center w-full">Talk to Bob</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-10 p-6 reveal" style="background:rgba(192,57,43,0.05);border:1px solid rgba(192,57,43,0.12);">
+      <div class="display text-center text-cream text-xl md:text-2xl">
+        SHOW CARS &middot; RAT RODS &middot; DAILY DRIVERS &middot; AWARD WINNERS &middot; ALL MAKES &middot; ALL BUILDS
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     GALLERY
+══════════════════════════════════════ -->
+<section class="w-full py-20" style="background:#0A0A0B; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12 reveal">
+      <div class="label mb-3" style="color:#C0392B;">The Work</div>
+      <h2 class="display text-cream" style="font-size: clamp(2rem, 5vw, 4rem);">33 YEARS OF PROOF</h2>
+    </div>
+    <div class="gallery-item reveal mb-2">
+      <img src="show-car.jpg" alt="Show car at classic car show" class="w-full object-cover" style="height:420px;">
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 reveal">
+      <div class="gallery-item col-span-2">
+        <img src="rat-rod-truck.jpg" alt="Rat rod truck at Dedic's shop" class="w-full object-cover" style="height:240px; object-position:center 30%;">
+      </div>
+      <div class="gallery-item">
+        <img src="paint-job.jpg" alt="Show quality paint" class="w-full object-cover" style="height:240px;">
+      </div>
+      <div class="gallery-item">
+        <img src="suspension.jpg" alt="Rebuilt suspension" class="w-full object-cover" style="height:240px;">
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-2 mt-2 reveal">
+      <div class="gallery-item">
+        <img src="restoration-frame-off.jpg" alt="Frame-off restoration" class="w-full object-cover" style="height:180px;">
+      </div>
+      <div class="gallery-item">
+        <img src="ls-swap.jpg" alt="LS swap engine bay" class="w-full object-cover" style="height:180px;">
+      </div>
+      <div class="gallery-item">
+        <img src="interior.jpg" alt="Restored interior" class="w-full object-cover" style="height:180px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     REVIEWS
+══════════════════════════════════════ -->
+<section id="reviews" class="w-full py-20" style="background:#111113; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="text-center mb-12 reveal px-4">
+    <div class="label mb-3" style="color:#C0392B;">What People Say About Bob</div>
+    <h2 class="display text-cream" style="font-size: clamp(2rem, 5vw, 4rem);">
+      REAL PEOPLE.<br><span class="rust-grad">REAL RESULTS.</span>
+    </h2>
+  </div>
+
+  <div class="marquee-viewport">
+    <div class="marquee-track" id="marquee-reviews">
+
+      <!-- SET 1 — Real Google Reviews -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"My car was done in the exact time frame Bob said it would be done. Great job on fixing the door and fender — couldn't be happier."</div>
+        <div class="review-author">Diana O'Connell</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Dedic's is awesome — the owner is one of the coolest, kindest people I've ever met. My car was done in the exact time frame stated and a job well done. I highly recommend Dedic's — my car repairs will be taken care of here from now on."</div>
+        <div class="review-author">Susan Fries</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Excellent service! Fixed our sunroof problem on our Ford Fusion after the dealership said total replacement. They were honest and personal. If you need a collision shop, search no further. Thank you Bob!"</div>
+        <div class="review-author">Chad Montague</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Dedic saved me $800 by magically smoothing out a crease and repainting the area on my 2012 Mustang. Looks great, fast, and reasonably priced."</div>
+        <div class="review-author">Thomas Schultz</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Great place. The owner is a very good painter — professional work done. Classic cars, you name it, he can get it done. He did work on my '04 Impala and matched the paint perfectly. He does great work."</div>
+        <div class="review-author">Robert Fitzsimmons</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Got my car in right away after hitting a deer! The owner is very nice and professional!"</div>
+        <div class="review-author">Andria Waters</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Thank you Bob for your wonderful work. I know where to go if I need anything else in the future."</div>
+        <div class="review-author">Jonathon McCorkle</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Very fast and professional — first time customer and I'll definitely be back."</div>
+        <div class="review-author">Robert Olajos</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"What a great human being."</div>
+        <div class="review-author">James Blum</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Amazing work!!!!"</div>
+        <div class="review-author">Jamie Newman</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+
+      <!-- SET 2 — Duplicate for loop -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"My car was done in the exact time frame Bob said it would be done. Great job on fixing the door and fender — couldn't be happier."</div>
+        <div class="review-author">Diana O'Connell</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Dedic's is awesome — the owner is one of the coolest, kindest people I've ever met. My car was done in the exact time frame stated and a job well done. I highly recommend Dedic's — my car repairs will be taken care of here from now on."</div>
+        <div class="review-author">Susan Fries</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Excellent service! Fixed our sunroof problem on our Ford Fusion after the dealership said total replacement. They were honest and personal. If you need a collision shop, search no further. Thank you Bob!"</div>
+        <div class="review-author">Chad Montague</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Dedic saved me $800 by magically smoothing out a crease and repainting the area on my 2012 Mustang. Looks great, fast, and reasonably priced."</div>
+        <div class="review-author">Thomas Schultz</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Great place. The owner is a very good painter — professional work done. Classic cars, you name it, he can get it done. He did work on my '04 Impala and matched the paint perfectly. He does great work."</div>
+        <div class="review-author">Robert Fitzsimmons</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Got my car in right away after hitting a deer! The owner is very nice and professional!"</div>
+        <div class="review-author">Andria Waters</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Thank you Bob for your wonderful work. I know where to go if I need anything else in the future."</div>
+        <div class="review-author">Jonathon McCorkle</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Very fast and professional — first time customer and I'll definitely be back."</div>
+        <div class="review-author">Robert Olajos</div>
+        <div class="review-source">Google Review &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"What a great human being."</div>
+        <div class="review-author">James Blum</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Amazing work!!!!"</div>
+        <div class="review-author">Jamie Newman</div>
+        <div class="review-source">Google Review &middot; Local Guide &middot; Owosso, MI</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="text-center mt-10 reveal px-4">
+    <div class="inline-flex items-center gap-3 px-6 py-3 mb-5" style="background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.15);">
+      <span class="display text-2xl" style="color:#C0392B;">4.8</span>
+      <span class="display text-cream text-xl">★★★★★</span>
+      <span class="label" style="color:#6B6B78;font-size:0.6rem;">on Google &middot; 24 Reviews</span>
+    </div>
+    <br>
+    <a href="https://www.google.com/search?q=Dedic%27s+Auto+Body+Owosso+MI" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(192,57,43,0.35);color:#C0392B;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;padding:13px 28px;text-decoration:none;transition:border-color 0.28s,background 0.28s;"
+       onmouseover="this.style.borderColor='#C0392B';this.style.background='rgba(192,57,43,0.08)'"
+       onmouseout="this.style.borderColor='rgba(192,57,43,0.35)';this.style.background='transparent'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Leave Bob a Review
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<section class="w-full py-36 md:py-48 relative overflow-hidden cta-bg">
+  <div class="absolute inset-0 cta-scrim"></div>
+  <div class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 reveal">
+    <div class="label mb-5" style="color:#C0392B;">Ready to Build?</div>
+    <h2 class="display text-cream mb-6" style="font-size: clamp(3rem, 9vw, 8rem); max-width:720px;">
+      LET'S TALK<br><span class="rust-grad">ABOUT YOUR CAR.</span>
+    </h2>
+    <p class="font-body font-300 mb-10 max-w-lg text-xl leading-relaxed" style="color:rgba(245,240,232,0.7);">
+      Bob's not taking on every job — he's taking on the right ones. If you've got a classic that deserves real work, call him. He'll tell you exactly what it needs and whether it's the right fit.
+    </p>
+    <button type="button" onclick="openContact()" class="btn-rust text-base px-14 py-5">Talk to Bob</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer id="contact" class="w-full pt-20 pb-10 px-4" style="background:#0A0A0B; border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+      <div>
+        <div class="mb-6">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:0.04em;color:#F5F0E8;text-transform:uppercase;">DEDIC'S <span style="color:#C0392B;">RESTORATION</span></span>
+        </div>
+        <p class="font-body font-300 text-sm leading-relaxed max-w-xs" style="color:#6B6B78;">33 years of frame-off restorations, rat rods, LS swaps, and show-quality paint in Owosso, MI. Bob does this because he loves it — and it shows.</p>
+      </div>
+      <div>
+        <div class="label mb-5" style="color:#C0392B;">Navigate</div>
+        <ul class="space-y-3 font-body font-300 text-sm">
+          <li><a href="#build"    class="hover:text-cream transition-colors" style="color:#6B6B78;">The '57 Build</a></li>
+          <li><a href="#services" class="hover:text-cream transition-colors" style="color:#6B6B78;">Services</a></li>
+          <li><a href="#story"    class="hover:text-cream transition-colors" style="color:#6B6B78;">Bob's Story</a></li>
+          <li><a href="#reviews"  class="hover:text-cream transition-colors" style="color:#6B6B78;">Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="label mb-5" style="color:#C0392B;">Find Bob</div>
+        <div class="space-y-3 font-body font-300 text-sm" style="color:#6B6B78;">
+          <div><a href="tel:+19897236336" class="hover:text-cream transition-colors">📞 (989) 723-6336</a></div>
+          <div>📍 1701 W M 21, Owosso, MI 48867</div>
+          <div>🕐 Mon–Fri: 8:00 AM – 5:00 PM</div>
+          <div style="color:rgba(107,107,120,0.6);font-size:0.75rem;margin-top:4px;">Walk-ins welcome. Bob's usually in the shop.</div>
+        </div>
+        <div class="mt-6">
+          <button type="button" onclick="openContact()" class="btn-rust text-sm">Talk to Bob</button>
+        </div>
+      </div>
+    </div>
+    <div class="rust-rule mb-8"></div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-3 font-body font-300 text-xs" style="color:#6B6B78;">
+      <div>© 2025 Dedic's Auto Body & Restoration. All rights reserved.</div>
+      <div>Website by <a href="https://brechtland.com" target="_blank" rel="noopener" style="color:#C0392B;text-decoration:none;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">Brechtland</a></div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     MOBILE STICKY BAR
+══════════════════════════════════════ -->
+<div id="sticky-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:8000;background:rgba(10,10,11,0.97);border-top:1px solid rgba(192,57,43,0.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 20px;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);">
+  <div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:0.95rem;letter-spacing:0.06em;text-transform:uppercase;color:#F5F0E8;line-height:1.1;">Dedic's Restoration</div>
+    <div style="font-family:'Barlow',sans-serif;font-weight:300;font-size:0.72rem;color:rgba(245,240,232,0.38);margin-top:2px;">Owosso, MI &middot; 33 Years</div>
+  </div>
+  <button type="button" onclick="openContact()" style="flex-shrink:0;background:#C0392B;color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;padding:11px 24px;border:none;cursor:pointer;transition:background 0.25s;white-space:nowrap;" onmouseover="this.style.background='#E74C3C'" onmouseout="this.style.background='#C0392B'">
+    Talk to Bob
+  </button>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     CONTACT MODAL
+══════════════════════════════════════ -->
+<div id="contact-modal" aria-modal="true" role="dialog" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(10,10,11,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;overflow-y:auto;">
+  <div style="position:relative;width:100%;max-width:520px;margin:auto;background:linear-gradient(160deg,rgba(22,22,25,0.99),rgba(12,12,14,1));border:1px solid rgba(192,57,43,0.2);padding:40px 36px;">
+    <button onclick="closeContact()" aria-label="Close" style="position:absolute;top:16px;right:18px;background:none;border:none;color:rgba(245,240,232,0.3);cursor:pointer;font-size:1.3rem;line-height:1;padding:4px 8px;transition:color 0.2s;" onmouseover="this.style.color='#C0392B'" onmouseout="this.style.color='rgba(245,240,232,0.3)'">✕</button>
+
+    <div id="contact-form-state">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#C0392B;margin-bottom:8px;">Dedic's Auto Body &middot; Owosso, MI</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;line-height:0.95;font-size:clamp(1.9rem,5vw,2.7rem);color:#F5F0E8;margin-bottom:10px;">TALK TO BOB</h2>
+      <p style="font-family:'Barlow',sans-serif;font-weight:300;font-size:0.875rem;color:rgba(245,240,232,0.5);margin-bottom:28px;line-height:1.65;">Tell Bob what you've got and what you're looking to do. He'll reach out personally.</p>
+
+      <form id="contact-form" onsubmit="submitContact(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div>
+            <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38);display:block;margin-bottom:6px;">Full Name *</label>
+            <input type="text" id="c-name" required placeholder="John Smith" style="width:100%;background:#161619;border:1px solid rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow',sans-serif;font-size:0.875rem;padding:10px 13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(192,57,43,0.55)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+          </div>
+          <div>
+            <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38);display:block;margin-bottom:6px;">Phone *</label>
+            <input type="tel" id="c-phone" required placeholder="(989) 555-0100" style="width:100%;background:#161619;border:1px solid rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow',sans-serif;font-size:0.875rem;padding:10px 13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(192,57,43,0.55)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38);display:block;margin-bottom:6px;">Email</label>
+          <input type="email" id="c-email" placeholder="john@email.com" style="width:100%;background:#161619;border:1px solid rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow',sans-serif;font-size:0.875rem;padding:10px 13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(192,57,43,0.55)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+        </div>
+
+        <div style="margin-bottom:12px;position:relative;">
+          <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38);display:block;margin-bottom:6px;">What Are You Working With?</label>
+          <select id="c-type" style="width:100%;background:#161619;border:1px solid rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow',sans-serif;font-size:0.875rem;padding:10px 13px;outline:none;transition:border-color 0.2s;cursor:pointer;-webkit-appearance:none;appearance:none;" onfocus="this.style.borderColor='rgba(192,57,43,0.55)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+            <option value="">Tell Bob what you've got…</option>
+            <option>Frame-Off Restoration</option>
+            <option>Show Car Paint Job</option>
+            <option>Rat Rod Build</option>
+            <option>LS / Motor Swap</option>
+            <option>Suspension & Steering Update</option>
+            <option>Interior Restoration</option>
+            <option>Air Conditioning Install</option>
+            <option>Something Else — I'll Describe It</option>
+          </select>
+          <div style="pointer-events:none;position:absolute;right:13px;bottom:11px;color:rgba(192,57,43,0.6);font-size:0.75rem;">▼</div>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,240,232,0.38);display:block;margin-bottom:6px;">Tell Bob About the Car</label>
+          <textarea id="c-message" rows="4" placeholder="Year, make, model, what condition it's in, what you're hoping to do with it…" style="width:100%;background:#161619;border:1px solid rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow',sans-serif;font-size:0.875rem;padding:10px 13px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(192,57,43,0.55)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'"></textarea>
+        </div>
+
+        <button type="submit" style="width:100%;text-align:center;display:block;background:#C0392B;color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:0.12em;text-transform:uppercase;padding:16px 36px;border:none;cursor:pointer;transition:background 0.28s,transform 0.25s;" onmouseover="this.style.background='#E74C3C';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#C0392B';this.style.transform='translateY(0)'">
+          Send It to Bob
+        </button>
+
+        <p style="font-family:'Barlow',sans-serif;font-size:0.72rem;color:rgba(245,240,232,0.22);text-align:center;margin-top:14px;">
+          Prefer to call? <a href="tel:+19897236336" style="color:rgba(192,57,43,0.65);text-decoration:none;">(989) 723-6336</a>
+        </p>
+      </form>
+    </div>
+
+    <div id="contact-success" style="display:none;text-align:center;padding:24px 0;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.5rem;color:#C0392B;margin-bottom:16px;">✓</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.7rem,4vw,2.3rem);color:#F5F0E8;margin-bottom:14px;">MESSAGE SENT</h2>
+      <p style="font-family:'Barlow',sans-serif;font-weight:300;font-size:0.9rem;color:rgba(245,240,232,0.55);line-height:1.75;margin-bottom:28px;">Bob will reach out personally. You can also call him directly at<br><strong style="color:#C0392B;">(989) 723-6336</strong>.</p>
+      <button onclick="closeContact()" style="display:inline-block;background:#C0392B;color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 40px;border:none;cursor:pointer;transition:background 0.25s;" onmouseover="this.style.background='#E74C3C'" onmouseout="this.style.background='#C0392B'">Done</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════ -->
+<script>
+  /* ── Marquee engine ── */
+  function initMarquee(trackId, pxPerSec) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    let pos = 0, last = null, paused = false;
+    const vp = track.closest('.marquee-viewport');
+    if (vp) { vp.addEventListener('mouseenter', () => { paused = true; }); vp.addEventListener('mouseleave', () => { paused = false; last = null; }); }
+    function step(ts) {
+      if (!paused) { if (last !== null) { const dt = Math.min(ts - last, 50); const hw = track.scrollWidth / 2; pos += (pxPerSec * dt) / 1000; if (pos >= hw) pos -= hw; track.style.transform = 'translateX(-' + pos + 'px)'; } last = ts; }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('load', function() {
+    initMarquee('marquee-stats', 36);
+    initMarquee('marquee-reviews', 24);
+
+    /* Gradient animation */
+    (function() {
+      var pos = 0, last = null, pps = 7;
+      var els = document.querySelectorAll('.rust-grad, .btn-rust');
+      function tick(ts) { if (last !== null) { var dt = Math.min(ts - last, 50); pos = (pos + (pps * dt) / 1000) % 100; for (var i = 0; i < els.length; i++) els[i].style.backgroundPosition = pos + '% ' + pos + '%'; } last = ts; requestAnimationFrame(tick); }
+      if (els.length) requestAnimationFrame(tick);
+    })();
+
+    /* Sticky bar */
+    var bar = document.getElementById('sticky-bar');
+    var hero = document.getElementById('home');
+    if (bar && hero) {
+      function checkSticky() { bar.style.transform = window.pageYOffset >= hero.offsetHeight * 0.85 ? 'translateY(0)' : 'translateY(100%)'; }
+      window.addEventListener('scroll', checkSticky, { passive: true });
+      checkSticky();
+    }
+  });
+
+  /* ── Nav scroll ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+  /* ── Mobile menu ── */
+  const mobBtn = document.getElementById('mob-btn');
+  const mobMenu = document.getElementById('mob-menu');
+  const icOpen = document.getElementById('ic-open');
+  const icClose = document.getElementById('ic-close');
+  let menuOpen = false;
+  mobBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobMenu.style.opacity = menuOpen ? '1' : '0';
+    mobMenu.style.pointerEvents = menuOpen ? 'all' : 'none';
+    icOpen.classList.toggle('hidden', menuOpen);
+    icClose.classList.toggle('hidden', !menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+    menuOpen = false; mobMenu.style.opacity = '0'; mobMenu.style.pointerEvents = 'none';
+    icOpen.classList.remove('hidden'); icClose.classList.add('hidden'); document.body.style.overflow = '';
+  }));
+
+  /* ── Build Stage Selector ── */
+  var currentStage = 0;
+  function setStage(n) {
+    document.getElementById('stage-' + currentStage).classList.remove('active');
+    document.getElementById('sbtn-' + currentStage).classList.remove('active');
+    currentStage = n;
+    document.getElementById('stage-' + n).classList.add('active');
+    document.getElementById('sbtn-' + n).classList.add('active');
+    document.getElementById('stage-progress').style.width = ((n + 1) * 20) + '%';
+  }
+
+  /* ── Reveal on scroll ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => ro.observe(el));
+
+  /* ── Contact modal ── */
+  function openContact() {
+    var modal = document.getElementById('contact-modal');
+    var bar = document.getElementById('sticky-bar');
+    document.getElementById('contact-form-state').style.display = 'block';
+    document.getElementById('contact-success').style.display = 'none';
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    if (bar) bar.style.transform = 'translateY(100%)';
+  }
+  function closeContact() {
+    document.getElementById('contact-modal').style.display = 'none';
+    document.body.style.overflow = '';
+    var bar = document.getElementById('sticky-bar');
+    var hero = document.getElementById('home');
+    if (bar && hero) bar.style.transform = hero.getBoundingClientRect().bottom <= 0 ? 'translateY(0)' : 'translateY(100%)';
+  }
+  function submitContact(e) {
+    e.preventDefault();
+    var formData = {
+      name: document.getElementById('c-name').value,
+      phone: document.getElementById('c-phone').value,
+      email: document.getElementById('c-email').value,
+      type: document.getElementById('c-type').value,
+      message: document.getElementById('c-message').value
+    };
+    fetch('https://formspree.io/f/meelwrne', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    }).catch(function(err) { console.log('Form error:', err); });
+    document.getElementById('contact-form-state').style.display = 'none';
+    document.getElementById('contact-success').style.display = 'block';
+  }
+  document.getElementById('contact-modal').addEventListener('click', function(e) { if (e.target === this) closeContact(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeContact(); });
+</script>
+
+</body>
+</html>
